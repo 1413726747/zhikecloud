@@ -118,7 +118,7 @@
     <div class="container">
         <h1>智课云服务</h1>
         
-        <div class="form-group">
+        <!-- <div class="form-group">
             <label for="name">您的姓名:</label>
             <input type="text" id="name" placeholder="请输入您的姓名">
         </div>
@@ -126,39 +126,44 @@
         <div class="form-group">
             <label for="email">电子邮箱:</label>
             <input type="email" id="email" placeholder="example@domain.com">
+        </div> -->
+
+		<div class="form-group">
+            <label for="message">内容输入窗口:</label>
+            <textarea id="message" rows="4" placeholder="input..."></textarea>
         </div>
         
         <div class="form-group">
-            <label for="message">留言内容:</label>
-            <textarea id="message" rows="4" placeholder="请输入您的留言..."></textarea>
+            <label for="message">输出窗口:</label>
+            <textarea id="message" rows="4" placeholder="out..."></textarea>
         </div>
         
         <div class="form-group">
-            <label for="color">选择您喜欢的颜色:</label>
+            <label for="color">选择服务:</label>
             <select id="color">
                 <option value="">-- 请选择 --</option>
-                <option value="red">红色</option>
-                <option value="blue">蓝色</option>
-                <option value="green">绿色</option>
-                <option value="yellow">黄色</option>
+                <option value="red">问题求解</option>
+                <option value="blue">思维导图</option>
+                <option value="green">内容推荐</option>
+                <option value="yellow">数据输入</option>
             </select>
         </div>
         
-        <button id="submitBtn">提交表单</button>
-        <button id="resetBtn">重置表单</button>
+        <button id="submitBtn">提交选择</button>
+        <button id="resetBtn">重置</button>
         
         <div id="response"></div>
         
-        <div class="counter">
+        <!-- <div class="counter">
             <span id="counterValue">0</span>
             <div>
                 <button id="incrementBtn">增加</button>
                 <button id="decrementBtn">减少</button>
             </div>
-        </div>
+        </div> -->
         
         <div id="dynamicContent">
-            <h2>动态内容区域</h2>
+            <h2>数据库内容展示</h2>
             <button id="addItemBtn">添加新项目</button>
             <button id="changeColorBtn">改变背景颜色</button>
             <div id="itemsContainer"></div>
@@ -202,21 +207,21 @@
             document.getElementById('response').style.display = 'none';
         });
         
-        // 计数器功能
-        let counter = 0;
-        const counterValue = document.getElementById('counterValue');
+        // // 计数器功能
+        // let counter = 0;
+        // const counterValue = document.getElementById('counterValue');
         
-        document.getElementById('incrementBtn').addEventListener('click', function() {
-            counter++;
-            counterValue.textContent = counter;
-            counterValue.style.color = counter >= 0 ? 'green' : 'red';
-        });
+        // document.getElementById('incrementBtn').addEventListener('click', function() {
+        //     counter++;
+        //     counterValue.textContent = counter;
+        //     counterValue.style.color = counter >= 0 ? 'green' : 'red';
+        // });
         
-        document.getElementById('decrementBtn').addEventListener('click', function() {
-            counter--;
-            counterValue.textContent = counter;
-            counterValue.style.color = counter >= 0 ? 'green' : 'red';
-        });
+        // document.getElementById('decrementBtn').addEventListener('click', function() {
+        //     counter--;
+        //     counterValue.textContent = counter;
+        //     counterValue.style.color = counter >= 0 ? 'green' : 'red';
+        // });
         
         // 动态内容管理
         let colors = ['#f8f9fa', '#e2f3fd', '#f0e6ff', '#ffe6e6'];
@@ -254,9 +259,9 @@
         }
         
         // 初始化添加几个项目
-        addItem('欢迎使用交互式网页');
-        addItem('尝试点击各种按钮');
-        addItem('体验动态效果');
+        addItem('数据1');
+        addItem('数据2');
+        addItem('数据3');
     </script>
 </body>
 </html>
