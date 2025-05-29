@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     welcomeMessage.innerHTML = `
                         <div class="ai-header">
                             <img src="tes.png"class="custom-icon">
-                            <h3>AI助手</h3>
+                            <h3>AI助手小陀螺</h3>
                         </div>
                         <p>您好！现在是${featureName}模式，有什么可以帮您的吗？</p>
                         <div class="message-time">刚刚</div>
