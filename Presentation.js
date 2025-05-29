@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', function() {
             const chatContainer = document.getElementById('chatContainer');
             const messageInput = document.getElementById('messageInput');
             const sendButton = document.getElementById('sendButton');
+            const fileLabel = document.querySelector('.file-label'); // 获取label
+            const fileInput = document.getElementById('fileInput');
             const currentFeatureTitle = document.querySelector('.current-feature h2');
             const currentFeatureIcon = document.querySelector('.current-feature i');
             const featureCards = document.querySelectorAll('.feature-card');
@@ -35,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 typingElement.innerHTML = `
                     <div class="ai-header">
                         <img src="tes.png"class="custom-icon">
-                        <h3>AI助手</h3>
+                        <h3>AI助手小陀螺</h3>
                     </div>
                     <div class="typing-indicator">
                         <span></span>
@@ -67,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     messageElement.innerHTML = `
                         <div class="ai-header">
                             <img src="tes.png"class="custom-icon">
-                            <h3>AI助手</h3>
+                            <h3>AI助手小陀螺</h3>
                         </div>
                         <p>${text}</p>
                         <div class="message-time">${timeString}</div>
@@ -83,26 +85,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 chatContainer.scrollTop = chatContainer.scrollHeight;
             }
             
-            // 生成AI响应（模拟）
-            // function generateAIResponse(userMessage) {
-            //     const responses = {
-            //         '你好': '您好！很高兴为您服务。请问有什么可以帮您的吗？',
-            //         '你是谁': '我是AI智能助手，可以帮您解答问题、生成内容、编写代码等。',
-            //         '你会做什么': '我可以进行智能对话、内容创作、编程辅助、翻译、数据分析等任务。',
-            //         '谢谢': '不客气！随时为您效劳。如果有其他问题，请随时问我。',
-            //         '默认': `好的，我理解您说的是："${userMessage}"。在实际应用中，这里会连接真实的AI模型（如GPT-4）生成智能回复。这个演示展示了前端界面和交互逻辑，完整的AI助手网站还需要后端服务和AI API集成。`
-            //     };
-
-            //     const lowerCaseMessage = userMessage.toLowerCase();
-            //     for (const [key, response] of Object.entries(responses)) {
-            //         if (lowerCaseMessage.includes(key.toLowerCase())) {
-            //             return response;
-            //         }
-            //     }
-                
-            //     return responses['默认'];
-            // }
-            
             // 事件监听
             sendButton.addEventListener('click', sendMessage);
             
@@ -116,17 +98,20 @@ document.addEventListener('DOMContentLoaded', function() {
             // 侧边栏功能卡片点击事件
             featureCards.forEach(card => {
                 card.addEventListener('click', function() {
-                    // 移除所有卡片的active-feature类
-                    featureCards.forEach(c => c.classList.remove('active-feature'));
-                    // 为当前点击的卡片添加active-feature类
-                    this.classList.add('active-feature');
-                    
-                    // 更新主内容区标题和图标
                     const featureName = this.getAttribute('data-feature');
                     const iconClass = this.getAttribute('data-icon');
+                    const model = this.getAttribute('data-model');
                     currentFeatureTitle.textContent = featureName;
                     currentFeatureIcon.className = `fas ${iconClass}`;
-                    
+                    applyer.model_change(model);
+
+                    // 只在模式1显示文件上传
+                    if (model === "1") {
+                        fileLabel.style.display = '';
+                    } else {
+                        fileLabel.style.display = 'none';
+                    }
+
                     // 清空聊天容器并添加欢迎消息
                     chatContainer.innerHTML = '';
                     const welcomeMessage = document.createElement('div');
@@ -141,5 +126,23 @@ document.addEventListener('DOMContentLoaded', function() {
                     `;
                     chatContainer.appendChild(welcomeMessage);
                 });
+            });
+
+            // 页面加载时只在模式1显示
+            if (applyer.model === "1") {
+                fileLabel.style.display = '';
+            } else {
+                fileLabel.style.display = 'none';
+            }
+
+            // 文件选择事件
+            fileInput.addEventListener('change', function() {
+                const file = fileInput.files[0];
+                // 让 handleFileInput 返回是否成功
+                const result = applyer.handleFileInput(file, addMessage);
+                // 如果失败（如类型不支持），AI输出错误提示
+                if (result === false) {
+                    addMessage('文件接收失败，请检查文件类型或内容。', 'ai');
+                }
             });
         });

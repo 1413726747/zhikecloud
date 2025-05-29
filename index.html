@@ -439,7 +439,29 @@
             vertical-align: middle; /* 对齐方式（与文本对齐） */
             margin-right: 10px;     /* 与原图标保持一致的间距 */
         }
-        
+
+        .file-label {
+            display: flex;
+            align-items: center;
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 25px;
+            padding: 8px 16px;
+            font-size: 14px;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: all 0.2s ease;
+            color: var(--primary-color);
+            height: 36px;
+        }
+        .file-label i {
+            margin-right: 8px;
+            font-size: 18px;
+        }
+        .file-label:hover {
+            background: var(--primary-color);
+            color: #fff;
+        }
     </style>
 </head>
 <body>
@@ -458,31 +480,31 @@
             
             <div class="features">
 
-                <div class="feature-card active-feature" data-feature="数据分析" data-icon="fa-chart-line">
+                <div class="feature-card active-feature" data-feature="数据上传" data-icon="fa-chart-line" data-model="1">
                     <i class="fas fa-chart-line"></i>
                     <h3>数据上传</h3>
                     <p>上传原始数据到数据库</p>
                 </div>
 
-                <div class="feature-card" data-feature="问题求解" data-icon="fa-comments">
+                <div class="feature-card" data-feature="问题求解" data-icon="fa-comments" data-model="2">
                     <i class="fas fa-comments"></i>
                     <h3>问题求解</h3>
                     <p>与AI进行自然语言交流，解答各类问题</p>
                 </div>
                 
-                <div class="feature-card" data-feature="编程辅助" data-icon="fa-code">
+                <div class="feature-card" data-feature="个性化推荐" data-icon="fa-code" data-model="3">
                     <i class="fas fa-code"></i>
-                    <h3>编程辅助</h3>
-                    <p>编写、调试和解释代码</p>
+                    <h3>个性化推荐</h3>
+                    <p>根据用户历史行为和偏好，提供个性化内容推荐</p>
                 </div>
-                
-                <div class="feature-card" data-feature="翻译助手" data-icon="fa-language">
+
+                <div class="feature-card" data-feature="翻译助手" data-icon="fa-language" data-model="4">
                     <i class="fas fa-language"></i>
                     <h3>翻译助手</h3>
                     <p>多语言即时翻译和语言学习</p>
                 </div>
 
-                <div class="feature-card" data-feature="代码测试" data-icon="fa-file-alt">
+                <div class="feature-card" data-feature="代码测试" data-icon="fa-file-alt" data-model="5">
                     <i class="fas fa-file-alt"></i>
                     <h3>代码测试</h3>
                     <p>对代码进行单元测试和集成测试</p>
@@ -504,7 +526,7 @@
             <div class="chat-header">
                 <div class="current-feature">
                     <i class="fas fa-comments"></i>
-                    <h2>智能对话</h2>
+                    <h2>数据上传</h2>
                 </div>
                 <div class="status">
                     <div class="status-indicator"></div>
@@ -512,27 +534,12 @@
                 </div>
             </div>
             
-            <!-- <div class="action-buttons">
-                <div class="action-button">
-                    <i class="fas fa-lightbulb"></i> 创意点子
-                </div>
-                <div class="action-button">
-                    <i class="fas fa-pen"></i> 文章撰写
-                </div>
-                <div class="action-button">
-                    <i class="fas fa-code"></i> 代码生成
-                </div>
-                <div class="action-button">
-                    <i class="fas fa-book"></i> 学习辅导
-                </div>
-            </div> -->
-            
             <div class="chat-container" id="chatContainer">
                 <!-- 聊天消息会动态添加在这里 -->
                 <div class="message ai-message">
                     <div class="ai-header">
                         <img src="tes.png"class="custom-icon">
-                        <h3>AI助手</h3>
+                        <h3>AI助手小陀螺</h3>
                     </div>
                     <p>您好！我是您的AI助手小陀螺，有什么可以帮您的吗？</p>
                     <div class="message-time">刚刚</div>
@@ -540,6 +547,11 @@
             </div>
             
             <div class="input-area">
+                <label for="fileInput" class="file-label">
+                    <i class="fas fa-paperclip"></i>
+                    <span>上传文件</span>
+                    <input type="file" id="fileInput" style="display:none;">
+                </label>
                 <textarea class="message-input" id="messageInput" placeholder="输入您的问题或需求..." rows="1"></textarea>
                 <button class="send-button" id="sendButton">
                     <i class="fas fa-paper-plane"></i>
@@ -548,6 +560,9 @@
         </div>
     </div>
 
+
+    <!-- 其它包引入 -->
+     
     <script src="Application.js"></script>
     <script src="Presentation.js"></script>
 </body>
