@@ -98,6 +98,11 @@ document.addEventListener('DOMContentLoaded', function() {
             // 侧边栏功能卡片点击事件
             featureCards.forEach(card => {
                 card.addEventListener('click', function() {
+                    // 移除所有卡片的active-feature类
+                    featureCards.forEach(c => c.classList.remove('active-feature'));
+                    // 为当前点击的卡片添加active-feature类
+                    this.classList.add('active-feature');
+
                     const featureName = this.getAttribute('data-feature');
                     const iconClass = this.getAttribute('data-icon');
                     const model = this.getAttribute('data-model');
